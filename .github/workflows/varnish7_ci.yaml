@@ -74,7 +74,7 @@ jobs:
             type=semver,enable=false,pattern=v{{major}}.{{minor}}
             type=semver,enable=false,pattern=v{{major}}
             
-            type=ref,enable=true,,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
+            type=ref,enable=true,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
           labels: |
             org.opencontainers.image.title=varnish7
             org.opencontainers.image.description=varnish7
