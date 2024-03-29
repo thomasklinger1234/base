@@ -70,6 +70,7 @@ jobs:
             type=ref,enable=true,event=pr,pattern=v{{date 'YYYYMMDD'}}-{{sha}}-{{branch}}
             type=ref,event=tag,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
             type=sha,enable=true,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
+            type=raw,value=v{{date 'YYYYMMDD'}}-{{sha}}
           labels: |
             org.opencontainers.image.title=varnish7
             org.opencontainers.image.description=varnish7
