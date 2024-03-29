@@ -65,7 +65,7 @@ jobs:
           images: |
             ghcr.io/${{ github.repository_owner }}/shopentrance/varnish7
           tags: |
-            type=edge,enable=true,branch=$repo.default_branch
+            type=edge,enable=true,branch=main
             
             type=schedule,enable=true,pattern=nightly
             type=schedule,enable=true,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
@@ -74,7 +74,7 @@ jobs:
             type=semver,enable=false,pattern=v{{major}}.{{minor}}
             type=semver,enable=false,pattern=v{{major}}
             
-            type=ref,enable=true,event=branch,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
+            type=ref,enable=true,,pattern=v{{date 'YYYYMMDD'}}-{{sha}}
           labels: |
             org.opencontainers.image.title=varnish7
             org.opencontainers.image.description=varnish7
@@ -102,13 +102,6 @@ jobs:
       - name: COSIGN_SIGN
         run: |
           cosign sign --yes --rekor-url "https://rekor.sigstore.dev/" ${TAGS}
-        env:
-          COSIGN_EXPERIMENTAL: 1
-          TAGS: ${{ steps.docker_metadata.outputs.tags }}
-
-      - name: COSIGN_VERIFY
-        run: |
-          cosign verify --rekor-url "https://rekor.sigstore.dev/" ${TAGS}
         env:
           COSIGN_EXPERIMENTAL: 1
           TAGS: ${{ steps.docker_metadata.outputs.tags }}
