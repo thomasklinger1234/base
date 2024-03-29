@@ -54,7 +54,9 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: COSIGN_SETUP
-        uses: sigstore/cosign-installer@v3.1.1
+        uses: sigstore/cosign-installer@v3.3.0
+        with:
+          cosign-release: 'v2.2.2'
 
       - name: DOCKER_METADATA
         id: docker_metadata
