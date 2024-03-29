@@ -99,14 +99,14 @@ jobs:
 
       - name: COSIGN_SIGN
         run: |
-          cosign sign --yes ${TAGS}
+          cosign sign --yes --rekor-url "https://rekor.sigstore.dev/" ${TAGS}
         env:
           COSIGN_EXPERIMENTAL: 1
           TAGS: ${{ steps.docker_metadata.outputs.tags }}
 
       - name: COSIGN_VERIFY
         run: |
-          cosign verify ${TAGS}
+          cosign verify --rekor-url "https://rekor.sigstore.dev/" ${TAGS}
         env:
           COSIGN_EXPERIMENTAL: 1
           TAGS: ${{ steps.docker_metadata.outputs.tags }}
