@@ -99,7 +99,17 @@ jobs:
 
       - name: COSIGN_SIGN
         run: |
-          cosign sign --yes ghcr.io/${{ github.repository_owner }}/shopentrance/varnish7:edge
+          cosign sign --yes ${TAGS}
+        env:
+          COSIGN_EXPERIMENTAL: 1
+          TAGS: ${{ steps.docker_metadata.outputs.tags }}
+
+      - name: COSIGN_VERIFY
+        run: |
+          cosign verify ${TAGS}
+        env:
+          COSIGN_EXPERIMENTAL: 1
+          TAGS: ${{ steps.docker_metadata.outputs.tags }}
 
 #      - name: TRIVY_SCAN
 #        uses: aquasecurity/trivy-action@master
